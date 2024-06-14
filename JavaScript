@@ -1,0 +1,20 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const progress = document.getElementById('progress');
+    const trackingLink = document.getElementById('tracking-link');
+
+    // Function to calculate progress based on time
+    function updateProgress() {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+        const hoursPassed = (now - start) / 1000 / 60 / 60;
+        const progressPercent = (Math.floor(hoursPassed / 12) % 4) * 25;
+        progress.style.width = progressPercent + '%';
+        trackingLink.href = `#progress${progressPercent}`;
+    }
+
+    // Initial update
+    updateProgress();
+
+    // Update progress every minute for smoother transitions
+    setInterval(updateProgress, 60000);
+});
